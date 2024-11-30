@@ -28,6 +28,7 @@ let package = Package(
       url: "https://github.com/pointfreeco/swift-parsing",
       from: "0.13.0"
     ),
+    .package(path: "NewDayPlugin"),
   ],
   targets: [
     .executableTarget(

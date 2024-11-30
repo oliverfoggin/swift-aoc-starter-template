@@ -23,8 +23,19 @@ The challenges assume three files (replace 00 with the day of the challenge).
 - `Sources/Day00.swift`: the code to solve the challenge
 - `Tests/Day00Tests.swift`: any unit tests that you want to include
 
-To start a new day's challenge, make a copy of these files, updating 00 to the 
-day number.
+The Package contains a plug-in to generate these files:
+
+To start a new day's challenge, `cd` to the root directory of the package and run 
+
+```shell
+swift package --allow-writing-to-package-directory new-day <day-number>
+```
+
+which will create the three files for the day. It may look like a lot to type, but if your shell is correctly set up, history and auto-completien will make this easier.
+
+Alternatively, if you don't want to use the plugin make a copy of these files, updating 00 to the  day number.
+
+In either case, you will need to add the solution to the list of available solutions:
 
 ```diff
 // Add each new day implementation to this array:
