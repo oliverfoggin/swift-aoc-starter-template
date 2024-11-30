@@ -2,7 +2,7 @@ import ArgumentParser
 
 // Add each new day implementation to this array:
 let allChallenges: [any AdventDay] = [
-  Day00()
+  Day00(),
 ]
 
 @main
@@ -40,7 +40,7 @@ struct AdventOfCode: AsyncParsableCommand {
     var result: Result<T, Error>?
     let timing = await ContinuousClock().measure {
       do {
-        result = .success(try await part())
+        result = try await .success(part())
       } catch {
         result = .failure(error)
       }
@@ -65,7 +65,7 @@ struct AdventOfCode: AsyncParsableCommand {
       }
 
     for challenge in challenges {
-      print("Executing Advent of Code challenge \(challenge.day)...")
+      print(header(challenge.puzzleName))
 
       let timing1 = await run(part: challenge.part1, named: "Part 1")
       let timing2 = await run(part: challenge.part2, named: "Part 2")
@@ -77,5 +77,16 @@ struct AdventOfCode: AsyncParsableCommand {
         #endif
       }
     }
+  }
+}
+
+extension AdventOfCode {
+  func header(_ puzzleName: String) -> String {
+    let title = "Solutions for \(puzzleName)"
+    let length = title.count
+    let above = String(repeating: "-", count: length)
+    let underline = String(repeating: "=", count: length)
+
+    return "\n\(above)\n\(title)\n\(underline)\n"
   }
 }
