@@ -94,11 +94,11 @@ struct Day01: AdventDay, Sendable {
     let lists = self.lists
 
     let rightListCount: [Int: Int] = lists.1.reduce(into: [:]) { partialResult, i in
-      partialResult[i] = (partialResult[i] ?? 0) + 1
+      partialResult[i] = partialResult[i, default: 0] + 1
     }
 
     return lists.0.reduce(0) { partialResult, i in
-      partialResult + i * (rightListCount[i] ?? 0)
+      partialResult + i * rightListCount[i, default: 0]
     }
   }
 
