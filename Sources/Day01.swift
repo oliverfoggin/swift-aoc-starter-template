@@ -83,20 +83,22 @@ struct Day01: AdventDay, Sendable {
 
   // Replace this with your solution for the first part of the day's challenge.
   func part1() async throws -> Int {
-    let list1 = lists.0.sorted()
-    let list2 = lists.1.sorted()
+    let lists = self.lists
 
-    return zip(list1, list2)
+    return zip(lists.0.sorted(), lists.1.sorted())
       .map { abs($0 - $1) }
       .reduce(0, +)
   }
 
   func part2() async throws -> Int {
-    let list1 = lists.0
-    let list2 = lists.1
+    let lists = self.lists
 
-    return list1.reduce(0) { partialResult, i in
-      partialResult + i * list2.count { $0 == i }
+    let rightListCount: [Int: Int] = lists.1.reduce(into: [:]) { partialResult, i in
+      partialResult[i] = (partialResult[i] ?? 0) + 1
+    }
+
+    return lists.0.reduce(0) { partialResult, i in
+      partialResult + i * (rightListCount[i] ?? 0)
     }
   }
 
