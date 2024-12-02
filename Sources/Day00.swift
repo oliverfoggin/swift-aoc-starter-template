@@ -14,6 +14,10 @@ struct Day00: AdventDay, Sendable {
   func part1() async throws -> Int {
     0
   }
+
+  func part2() async throws -> Int {
+    0
+  }
 }
 
 // Add any extra code and types in here to separate it from the required behaviour
