@@ -27,15 +27,17 @@ struct Day02: AdventDay, Sendable {
 
 private extension Array<Int> {
   var isSafe: Bool {
-    let diffs = zip(self, dropFirst())
-      .map { pair in pair.0 - pair.1 }
-
-    return zip(diffs, diffs.dropFirst())
-      .reduce(true) { partialResult, diffPair in
+    zip(self, zip(dropFirst(), dropFirst().dropFirst()))
+      .map { pair -> (Int, Int) in
+        (pair.0 - pair.1.0, pair.1.0 - pair.1.1)
+      }
+      .reduce(true) { partialResult, diffPair -> Bool in
         partialResult
         && (1...3).contains(abs(diffPair.0))
         && (1...3).contains(abs(diffPair.1))
         && (diffPair.0 < 0) == (diffPair.1 < 0)
+      } until: { partialResult, _ in
+        !partialResult
       }
   }
 }
